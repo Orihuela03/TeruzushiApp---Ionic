@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button Fill="outline" routerLink="/home">Go to home</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <!-- Lista de mesas -->
+    <ion-item *ngFor="let table of tables">
+      <ion-label>
+        <h2>ID Restaurante: {{ table.id_restaurant }}</h2>
+        <p>Capacidad: {{ table.capacity }}</p>
+      </ion-label>
+      <!-- Botón para editar -->
+      <ion-button fill="outline" color="primary" (click)="startEdit(table)">Editar</ion-button>
+      <!-- Botón para eliminar -->
+      <ion-button fill="outline" color="danger" (click)="deleteTable(table.id)">Eliminar</ion-button>
+    </ion-item>
+  </ion-list>
+
+  <!-- Formulario para agregar una nueva mesa -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Agregar Mesa</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Capacidad:</ion-label>
+        <ion-input type="number" [(ngModel)]="newTable.capacity"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>ID Restaurante:</ion-label>
+        <ion-input type="number" [(ngModel)]="newTable.id_restaurant"></ion-input>
+      </ion-item>
+      <ion-button expand="block" color="success" (click)="addTable()">Agregar Mesa</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Formulario para editar una mesa -->
+  <ion-card *ngIf="editTable">
+    <ion-card-header>
+      <ion-card-title>Editar Mesa</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Capacidad:</ion-label>
+        <ion-input type="number" [(ngModel)]="editTable.capacity"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>ID Restaurante:</ion-label>
+        <ion-input type="number" [(ngModel)]="editTable.id_restaurant"></ion-input>
+      </ion-item>
+      <ion-button expand="block" color="primary" (click)="saveEdit()">Guardar Cambios</ion-button>
+      <ion-button expand="block" color="medium" (click)="cancelEdit()">Cancelar</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
