@@ -1,0 +1,7 @@
+{
+  "name": "TeruzushiApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
