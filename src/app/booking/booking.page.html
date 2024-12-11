@@ -6,7 +6,6 @@
 
 <ion-content>
   <ion-list>
-    <!-- Lista de reservas -->
     <ion-item *ngFor="let booking of bookings">
       <ion-label>
         <h2>Cliente: {{ booking.customerName }}</h2>
@@ -15,14 +14,20 @@
         <p>Comensales: {{ booking.numberOfEaters }}</p>
         <p>Fecha: {{ booking.date }}</p>
       </ion-label>
-      <!-- Botón para editar -->
-      <ion-button fill="outline" color="primary" (click)="startEdit(booking)">Editar</ion-button>
-      <!-- Botón para eliminar -->
-      <ion-button fill="outline" color="danger" (click)="deleteBooking(booking.id)">Eliminar</ion-button>
+
+      <ion-button fill="outline" color="primary" (click)="startEdit(booking)"
+        >Editar</ion-button
+      >
+
+      <ion-button
+        fill="outline"
+        color="danger"
+        (click)="deleteBooking(booking.id)"
+        >Eliminar</ion-button
+      >
     </ion-item>
   </ion-list>
 
-  <!-- Formulario para agregar una nueva reserva -->
   <ion-card>
     <ion-card-header>
       <ion-card-title>Agregar Reserva</ion-card-title>
@@ -30,19 +35,31 @@
     <ion-card-content>
       <ion-item>
         <ion-label>Nombre Cliente:</ion-label>
-        <ion-input type="text" [(ngModel)]="newBooking.customerName"></ion-input>
+        <ion-input
+          type="text"
+          [(ngModel)]="newBooking.customerName"
+        ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Email Cliente:</ion-label>
-        <ion-input type="email" [(ngModel)]="newBooking.customerEmail"></ion-input>
+        <ion-input
+          type="email"
+          [(ngModel)]="newBooking.customerEmail"
+        ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Teléfono Cliente:</ion-label>
-        <ion-input type="tel" [(ngModel)]="newBooking.customerPhone"></ion-input>
+        <ion-input
+          type="tel"
+          [(ngModel)]="newBooking.customerPhone"
+        ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Comensales:</ion-label>
-        <ion-input type="number" [(ngModel)]="newBooking.numberOfEaters"></ion-input>
+        <ion-input
+          type="number"
+          [(ngModel)]="newBooking.numberOfEaters"
+        ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Fecha:</ion-label>
@@ -51,14 +68,17 @@
       <ion-item>
         <ion-label>Seleccionar Mesa:</ion-label>
         <ion-select [(ngModel)]="newBooking.id_table">
-          <ion-select-option *ngFor="let table of tables" [value]="table.id">{{ table.capacity }} Personas</ion-select-option>
+          <ion-select-option *ngFor="let table of tables" [value]="table.id"
+            >{{ table.capacity }} Personas</ion-select-option
+          >
         </ion-select>
       </ion-item>
-      <ion-button expand="block" color="success" (click)="addBooking()">Agregar Reserva</ion-button>
+      <ion-button expand="block" color="success" (click)="addBooking()"
+        >Agregar Reserva</ion-button
+      >
     </ion-card-content>
   </ion-card>
 
-  <!-- Formulario para editar una reserva -->
   <ion-card *ngIf="editBooking">
     <ion-card-header>
       <ion-card-title>Editar Reserva</ion-card-title>
@@ -66,19 +86,31 @@
     <ion-card-content>
       <ion-item>
         <ion-label>Nombre Cliente:</ion-label>
-        <ion-input type="text" [(ngModel)]="editBooking.customerName"></ion-input>
+        <ion-input
+          type="text"
+          [(ngModel)]="editBooking.customerName"
+        ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Email Cliente:</ion-label>
-        <ion-input type="email" [(ngModel)]="editBooking.customerEmail"></ion-input>
+        <ion-input
+          type="email"
+          [(ngModel)]="editBooking.customerEmail"
+        ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Teléfono Cliente:</ion-label>
-        <ion-input type="tel" [(ngModel)]="editBooking.customerPhone"></ion-input>
+        <ion-input
+          type="tel"
+          [(ngModel)]="editBooking.customerPhone"
+        ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Comensales:</ion-label>
-        <ion-input type="number" [(ngModel)]="editBooking.numberOfEaters"></ion-input>
+        <ion-input
+          type="number"
+          [(ngModel)]="editBooking.numberOfEaters"
+        ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Fecha:</ion-label>
@@ -87,11 +119,17 @@
       <ion-item>
         <ion-label>Seleccionar Mesa:</ion-label>
         <ion-select [(ngModel)]="editBooking.id_table">
-          <ion-select-option *ngFor="let table of tables" [value]="table.id">{{ table.capacity }} Personas</ion-select-option>
+          <ion-select-option *ngFor="let table of tables" [value]="table.id"
+            >{{ table.capacity }} Personas</ion-select-option
+          >
         </ion-select>
       </ion-item>
-      <ion-button expand="block" color="primary" (click)="saveEdit()">Guardar Cambios</ion-button>
-      <ion-button expand="block" color="medium" (click)="cancelEdit()">Cancelar</ion-button>
+      <ion-button expand="block" color="primary" (click)="saveEdit()"
+        >Guardar Cambios</ion-button
+      >
+      <ion-button expand="block" color="medium" (click)="cancelEdit()"
+        >Cancelar</ion-button
+      >
     </ion-card-content>
   </ion-card>
 </ion-content>

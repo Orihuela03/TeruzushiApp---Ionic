@@ -7,9 +7,9 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./restaurant.page.scss'],
 })
 export class RestaurantPage implements OnInit {
-  restaurants: any[] = []; // Lista de restaurantes
-  newRestaurant = { name: '', address: '', capacity: 0 }; // Modelo para agregar un restaurante
-  editRestaurant: any = null; // Modelo para editar un restaurante
+  restaurants: any[] = [];
+  newRestaurant = { name: '', address: '', capacity: 0 };
+    editRestaurant: any = null;
 
   constructor(private api: ApiService) {}
 
@@ -17,7 +17,6 @@ export class RestaurantPage implements OnInit {
     this.loadRestaurants();
   }
 
-  // Cargar todos los restaurantes
   loadRestaurants() {
     this.api.getRestaurants().subscribe(
       (data) => {
@@ -29,9 +28,12 @@ export class RestaurantPage implements OnInit {
     );
   }
 
-  // Agregar un nuevo restaurante
   addRestaurant() {
-    if (this.newRestaurant.name && this.newRestaurant.address && this.newRestaurant.capacity > 0) {
+    if (
+      this.newRestaurant.name &&
+      this.newRestaurant.address &&
+      this.newRestaurant.capacity > 0
+    ) {
       this.api.addRestaurant(this.newRestaurant).subscribe(
         () => {
           this.loadRestaurants();
@@ -44,32 +46,29 @@ export class RestaurantPage implements OnInit {
     }
   }
 
-  // Iniciar edición de un restaurante
   startEdit(restaurant: any) {
-    this.editRestaurant = { ...restaurant }; // Crear una copia para editar
-  }
+    this.editRestaurant = { ...restaurant };
 
-  // Guardar cambios de un restaurante editado
   saveEdit() {
     if (this.editRestaurant) {
-      this.api.updateRestaurant(this.editRestaurant.id, this.editRestaurant).subscribe(
-        () => {
-          this.loadRestaurants();
-          this.editRestaurant = null; // Finalizar edición
-        },
-        (error) => {
-          console.error('Error al editar el restaurante:', error);
-        }
-      );
+      this.api
+        .updateRestaurant(this.editRestaurant.id, this.editRestaurant)
+        .subscribe(
+          () => {
+            this.loadRestaurants();
+            this.editRestaurant = null;
+          },
+          (error) => {
+            console.error('Error al editar el restaurante:', error);
+          }
+        );
     }
   }
 
-  // Cancelar edición
   cancelEdit() {
     this.editRestaurant = null;
   }
 
-  // Eliminar un restaurante
   deleteRestaurant(id: number) {
     this.api.deleteRestaurant(id).subscribe(
       () => {

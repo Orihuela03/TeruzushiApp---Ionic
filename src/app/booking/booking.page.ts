@@ -7,10 +7,17 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./booking.page.scss'],
 })
 export class BookingPage implements OnInit {
-  bookings: any[] = []; // Lista de reservas
-  newBooking = { customerName: '', customerEmail: '', customerPhone: '', numberOfEaters: 0, date: '', id_table: 0 }; // Modelo para agregar una reserva
-  editBooking: any = null; // Modelo para editar una reserva
-  tables: any[] = []; // Lista de mesas para elegir
+  bookings: any[] = [];
+  newBooking = {
+    customerName: '',
+    customerEmail: '',
+    customerPhone: '',
+    numberOfEaters: 0,
+    date: '',
+    id_table: 0,
+  }; // Modelo para agregar una reserva
+  editBooking: any = null;
+  tables: any[] = [];
 
   constructor(private api: ApiService) {}
 
@@ -19,7 +26,6 @@ export class BookingPage implements OnInit {
     this.loadTables();
   }
 
-  // Cargar todas las reservas
   loadBookings() {
     this.api.getBookings().subscribe(
       (data) => {
@@ -31,7 +37,6 @@ export class BookingPage implements OnInit {
     );
   }
 
-  // Cargar todas las mesas para la selección de la reserva
   loadTables() {
     this.api.getTables().subscribe(
       (data) => {
@@ -43,7 +48,6 @@ export class BookingPage implements OnInit {
     );
   }
 
-  // Agregar una nueva reserva
   addBooking() {
     if (
       this.newBooking.customerName &&
@@ -55,7 +59,14 @@ export class BookingPage implements OnInit {
       this.api.addBooking(this.newBooking).subscribe(
         () => {
           this.loadBookings();
-          this.newBooking = { customerName: '', customerEmail: '', customerPhone: '', numberOfEaters: 0, date: '', id_table: 0 };
+          this.newBooking = {
+            customerName: '',
+            customerEmail: '',
+            customerPhone: '',
+            numberOfEaters: 0,
+            date: '',
+            id_table: 0,
+          };
         },
         (error) => {
           console.error('Error al agregar la reserva:', error);
@@ -64,18 +75,16 @@ export class BookingPage implements OnInit {
     }
   }
 
-  // Iniciar edición de una reserva
   startEdit(booking: any) {
-    this.editBooking = { ...booking }; // Crear una copia para editar
+    this.editBooking = { ...booking };
   }
 
-  // Guardar cambios de una reserva editada
   saveEdit() {
     if (this.editBooking) {
       this.api.updateBooking(this.editBooking.id, this.editBooking).subscribe(
         () => {
           this.loadBookings();
-          this.editBooking = null; // Finalizar edición
+          this.editBooking = null;
         },
         (error) => {
           console.error('Error al editar la reserva:', error);
@@ -84,12 +93,10 @@ export class BookingPage implements OnInit {
     }
   }
 
-  // Cancelar edición
   cancelEdit() {
     this.editBooking = null;
   }
 
-  // Eliminar una reserva
   deleteBooking(id: number) {
     this.api.deleteBooking(id).subscribe(
       () => {

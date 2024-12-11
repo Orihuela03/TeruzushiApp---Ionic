@@ -13,8 +13,8 @@ import { RestaurantPage } from './restaurant.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    RestaurantPageRoutingModule
+    RestaurantPageRoutingModule,
   ],
-  declarations: [RestaurantPage]
+  declarations: [RestaurantPage],
 })
 export class RestaurantPageModule {}

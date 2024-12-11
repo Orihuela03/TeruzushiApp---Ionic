@@ -9,12 +9,7 @@ import { TablesPageRoutingModule } from './tables-routing.module';
 import { TablesPage } from './tables.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    TablesPageRoutingModule
-  ],
-  declarations: [TablesPage]
+  imports: [CommonModule, FormsModule, IonicModule, TablesPageRoutingModule],
+  declarations: [TablesPage],
 })
 export class TablesPageModule {}

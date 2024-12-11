@@ -3,10 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
-  private baseUrl = "http://localhost:8080/teruzushiapi";
+  private baseUrl = 'http://localhost:8080/teruzushiapi';
 
   constructor(private http: HttpClient) {}
 
@@ -25,7 +25,7 @@ export class ApiService {
   addRestaurant(data: any): Observable<any> {
     return this.http.post(this.baseUrl + '/restaurant', data);
   }
-  
+
   addTable(data: any): Observable<any> {
     return this.http.post(this.baseUrl + '/tables', data);
   }
@@ -47,14 +47,14 @@ export class ApiService {
   }
 
   deleteRestaurant(id: number): Observable<any> {
-    return this.http.delete(this.baseUrl + "/restaurant/" + id);
+    return this.http.delete(this.baseUrl + '/restaurant/' + id);
   }
 
   deleteTable(id: number): Observable<any> {
-    return this.http.delete(this.baseUrl + "/tables/" + id);
+    return this.http.delete(this.baseUrl + '/tables/' + id);
   }
 
   deleteBooking(id: number): Observable<any> {
-    return this.http.delete(this.baseUrl + "/booking/" + id);
+    return this.http.delete(this.baseUrl + '/booking/' + id);
   }
 }

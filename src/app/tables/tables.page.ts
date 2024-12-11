@@ -7,9 +7,9 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./tables.page.scss'],
 })
 export class TablesPage implements OnInit {
-  tables: any[] = []; // Lista de mesas
-  newTable = { capacity: 0, id_restaurant: 0 }; // Modelo para agregar una mesa
-  editTable: any = null; // Modelo para editar una mesa
+  tables: any[] = [];
+  newTable = { capacity: 0, id_restaurant: 0 };
+  editTable: any = null;
 
   constructor(private api: ApiService) {}
 
@@ -17,7 +17,6 @@ export class TablesPage implements OnInit {
     this.loadTables();
   }
 
-  // Cargar todas las mesas
   loadTables() {
     this.api.getTables().subscribe(
       (data) => {
@@ -29,7 +28,6 @@ export class TablesPage implements OnInit {
     );
   }
 
-  // Agregar una nueva mesa
   addTable() {
     if (this.newTable.capacity > 0 && this.newTable.id_restaurant > 0) {
       this.api.addTable(this.newTable).subscribe(
@@ -44,18 +42,16 @@ export class TablesPage implements OnInit {
     }
   }
 
-  // Iniciar edición de una mesa
   startEdit(table: any) {
-    this.editTable = { ...table }; // Crear una copia para editar
+    this.editTable = { ...table };
   }
 
-  // Guardar cambios de una mesa editada
   saveEdit() {
     if (this.editTable) {
       this.api.updateTable(this.editTable.id, this.editTable).subscribe(
         () => {
           this.loadTables();
-          this.editTable = null; // Finalizar edición
+          this.editTable = null;
         },
         (error) => {
           console.error('Error al editar la mesa:', error);
@@ -64,12 +60,10 @@ export class TablesPage implements OnInit {
     }
   }
 
-  // Cancelar edición
   cancelEdit() {
     this.editTable = null;
   }
 
-  // Eliminar una mesa
   deleteTable(id: number) {
     this.api.deleteTable(id).subscribe(
       () => {
