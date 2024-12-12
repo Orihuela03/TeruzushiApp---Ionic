@@ -14,13 +14,11 @@
         <p>Capacidad: {{ restaurant.capacity }}</p>
       </ion-label>
 
-      <!-- Botones de editar y eliminar -->
       <ion-button fill="outline" color="primary" (click)="startEdit(restaurant)">Editar</ion-button>
-      <ion-button fill="outline" color="danger" (click)="deleteRestaurant(restaurant.id)">Eliminar</ion-button>
+      <ion-button fill="outline" color="danger" (click)="deleteRestaurant(restaurant.id ?? 0)">Eliminar</ion-button>
     </ion-item>
   </ion-list>
 
-  <!-- Formulario para agregar un nuevo restaurante -->
   <ion-card>
     <ion-card-header>
       <ion-card-title>Agregar Restaurante</ion-card-title>
@@ -42,7 +40,6 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- Formulario para editar un restaurante -->
   <ion-card *ngIf="editRestaurant">
     <ion-card-header>
       <ion-card-title>Editar Restaurante</ion-card-title>
