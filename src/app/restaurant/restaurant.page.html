@@ -1,10 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button Fill="outline" routerLink="/home">Go to home</ion-button>
+    <ion-button fill="outline" routerLink="/home">Go to home</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <!-- Lista de restaurantes -->
   <ion-list>
     <ion-item *ngFor="let restaurant of restaurants">
       <ion-label>
@@ -13,19 +14,13 @@
         <p>Capacidad: {{ restaurant.capacity }}</p>
       </ion-label>
 
-      <ion-button fill="outline" color="primary" (click)="startEdit(restaurant)"
-        >Editar</ion-button
-      >
-
-      <ion-button
-        fill="outline"
-        color="danger"
-        (click)="deleteRestaurant(restaurant.id)"
-        >Eliminar</ion-button
-      >
+      <!-- Botones de editar y eliminar -->
+      <ion-button fill="outline" color="primary" (click)="startEdit(restaurant)">Editar</ion-button>
+      <ion-button fill="outline" color="danger" (click)="deleteRestaurant(restaurant.id)">Eliminar</ion-button>
     </ion-item>
   </ion-list>
 
+  <!-- Formulario para agregar un nuevo restaurante -->
   <ion-card>
     <ion-card-header>
       <ion-card-title>Agregar Restaurante</ion-card-title>
@@ -41,17 +36,13 @@
       </ion-item>
       <ion-item>
         <ion-label>Capacidad:</ion-label>
-        <ion-input
-          type="number"
-          [(ngModel)]="newRestaurant.capacity"
-        ></ion-input>
+        <ion-input type="number" [(ngModel)]="newRestaurant.capacity"></ion-input>
       </ion-item>
-      <ion-button expand="block" color="success" (click)="addRestaurant()"
-        >Agregar Restaurante</ion-button
-      >
+      <ion-button expand="block" color="success" (click)="addRestaurant()">Agregar Restaurante</ion-button>
     </ion-card-content>
   </ion-card>
 
+  <!-- Formulario para editar un restaurante -->
   <ion-card *ngIf="editRestaurant">
     <ion-card-header>
       <ion-card-title>Editar Restaurante</ion-card-title>
@@ -67,17 +58,10 @@
       </ion-item>
       <ion-item>
         <ion-label>Capacidad:</ion-label>
-        <ion-input
-          type="number"
-          [(ngModel)]="editRestaurant.capacity"
-        ></ion-input>
+        <ion-input type="number" [(ngModel)]="editRestaurant.capacity"></ion-input>
       </ion-item>
-      <ion-button expand="block" color="primary" (click)="saveEdit()"
-        >Guardar Cambios</ion-button
-      >
-      <ion-button expand="block" color="medium" (click)="cancelEdit()"
-        >Cancelar</ion-button
-      >
+      <ion-button expand="block" color="primary" (click)="saveEdit()">Guardar Cambios</ion-button>
+      <ion-button expand="block" color="medium" (click)="cancelEdit()">Cancelar</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>

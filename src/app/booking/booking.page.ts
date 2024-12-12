@@ -14,16 +14,16 @@ export class BookingPage implements OnInit {
     customerPhone: '',
     numberOfEaters: 0,
     date: '',
-    id_table: 0,
-  }; // Modelo para agregar una reserva
+    id_restaurant: 0,  // Cambiado de id_table a id_restaurant
+  };
   editBooking: any = null;
-  tables: any[] = [];
+  restaurants: any[] = [];  // Para cargar los restaurantes en lugar de las mesas
 
   constructor(private api: ApiService) {}
 
   ngOnInit() {
     this.loadBookings();
-    this.loadTables();
+    this.loadRestaurants();  // Cargar restaurantes en lugar de mesas
   }
 
   loadBookings() {
@@ -37,13 +37,13 @@ export class BookingPage implements OnInit {
     );
   }
 
-  loadTables() {
-    this.api.getTables().subscribe(
+  loadRestaurants() {
+    this.api.getRestaurants().subscribe(  // Cambiado para obtener los restaurantes
       (data) => {
-        this.tables = data;
+        this.restaurants = data;
       },
       (error) => {
-        console.error('Error al cargar las mesas:', error);
+        console.error('Error al cargar los restaurantes:', error);
       }
     );
   }
@@ -54,7 +54,7 @@ export class BookingPage implements OnInit {
       this.newBooking.customerEmail &&
       this.newBooking.customerPhone &&
       this.newBooking.numberOfEaters > 0 &&
-      this.newBooking.id_table > 0
+      this.newBooking.id_restaurant > 0  // Verifica que se seleccione un restaurante
     ) {
       this.api.addBooking(this.newBooking).subscribe(
         () => {
@@ -65,7 +65,7 @@ export class BookingPage implements OnInit {
             customerPhone: '',
             numberOfEaters: 0,
             date: '',
-            id_table: 0,
+            id_restaurant: 0,  // Restablecer id_restaurant
           };
         },
         (error) => {
