@@ -6,55 +6,58 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  private baseUrl = 'http://localhost:8080/teruzushiapi';
+  private baseUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) {}
 
+  // --- RESTAURANT SERVICES ---
   getRestaurants(): Observable<any> {
-    return this.http.get(this.baseUrl + '/restaurant');
-  }
-
-  getTables(): Observable<any> {
-    return this.http.get(this.baseUrl + '/tables');
-  }
-
-  getBookings(): Observable<any> {
-    return this.http.get(this.baseUrl + '/booking');
+    return this.http.get(`${this.baseUrl}/restaurants`);
   }
 
   addRestaurant(data: any): Observable<any> {
-    return this.http.post(this.baseUrl + '/restaurant', data);
-  }
-
-  addTable(data: any): Observable<any> {
-    return this.http.post(this.baseUrl + '/tables', data);
-  }
-
-  addBooking(data: any): Observable<any> {
-    return this.http.post(this.baseUrl + '/booking', data);
+    return this.http.post(`${this.baseUrl}/restaurants`, data);
   }
 
   updateRestaurant(id: number, data: any): Observable<any> {
-    return this.http.put(this.baseUrl + '/restaurant/' + id, data);
-  }
-
-  updateTable(id: number, data: any): Observable<any> {
-    return this.http.put(this.baseUrl + '/tables/' + id, data);
-  }
-
-  updateBooking(id: number, data: any): Observable<any> {
-    return this.http.put(this.baseUrl + '/booking/' + id, data);
+    return this.http.put(`${this.baseUrl}/restaurants/${id}`, data);
   }
 
   deleteRestaurant(id: number): Observable<any> {
-    return this.http.delete(this.baseUrl + '/restaurant/' + id);
+    return this.http.delete(`${this.baseUrl}/restaurants/${id}`);
+  }
+
+  // --- TABLE SERVICES ---
+  getTables(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/tables`);
+  }
+
+  addTable(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/tables`, data);
+  }
+
+  updateTable(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/tables/${id}`, data);
   }
 
   deleteTable(id: number): Observable<any> {
-    return this.http.delete(this.baseUrl + '/tables/' + id);
+    return this.http.delete(`${this.baseUrl}/tables/${id}`);
+  }
+
+  // --- BOOKING SERVICES ---
+  getBookings(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/bookings`);
+  }
+
+  addBooking(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/bookings`, data);
+  }
+
+  updateBooking(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/bookings/${id}`, data);
   }
 
   deleteBooking(id: number): Observable<any> {
-    return this.http.delete(this.baseUrl + '/booking/' + id);
+    return this.http.delete(`${this.baseUrl}/bookings/${id}`);
   }
 }
